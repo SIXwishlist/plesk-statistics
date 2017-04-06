@@ -48,7 +48,7 @@ class Subscription:
     def getContactName(self):
         return os.popen("plesk bin user --info "+self.loginName+" | grep 'Contact name' | awk -F ': ' '{print $2}'").readline()[0:-1]
     def getEmail(self):
-        return os.popen("plesk bin user --info "+self.domainName+" | grep 'Email' | awk -F ': ' '{print $2}'").readline()[0:-1]
+        return os.popen("plesk bin user --info "+self.loginName+" | grep 'Email' | awk -F ': ' '{print $2}'").readline()[0:-1]
 
 def main():
     domainList=map(lambda x:x[0:-1], os.popen('plesk bin domain --list').readlines())
