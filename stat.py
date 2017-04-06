@@ -12,7 +12,7 @@ class Subscription:
     hitNum=0
     def __init__(self, domainName):
         self.domainName=domainName
-        self.loginName=getLoginName()
+        self.loginName=self.getLoginName()
         self.ftpLoginName=self.getFtpLoginName()
         self.servicePlan=self.getServicePlan()
         self.contactName=self.getContactName()
