@@ -23,7 +23,7 @@ class Subscription:
         self.email=self.getEmail()
         self.createDomainList()
         tmp=datetime.datetime.now()
-        month=tmp.year+'年'+tmp.month+'月'
+        month=str(tmp.year)+'年'+str(tmp.month)+'月'
     def createDomainList(self):
         tmpList=[]
         for key,value in Subscription.domainFtpLoginNameDict.items():
