@@ -67,6 +67,7 @@ def main():
         obj.countHit()
         if obj.isOverHit():
             print "The subscription %s is Overhitted"%(ss)
+            obj.logInfo()
         else:
             print "The subscription %s is not Overhitted"%(ss)
             obj.logInfo()
