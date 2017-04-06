@@ -31,7 +31,7 @@ class Subscription:
         # print Subscription.domainFtpLoginNameDict
         for key,value in Subscription.domainHitDict.items():
             if key in self.domainList:
-                self.hitNum+=string.atoi(value)
+                self.hitNum+=value
     def isOverHit(self):
         if self.servicePlan in Subscription.servicePlanHitDict.keys():
             return self.hitNum > Subscription.servicePlanHitDict[self.servicePlan]
@@ -65,9 +65,9 @@ def main():
     domainList=map(lambda x:x[0:-1], os.popen('plesk bin domain --list').readlines())
     domainFtpLoginNameList=map(lambda x:os.popen("plesk bin domain --info "+x+" | grep 'FTP Login' | awk '{print $3}'").readline()[0:-1], domainList)
     Subscription.domainFtpLoginNameDict=dict((x,y) for x,y in zip(domainList, domainFtpLoginNameList))
-    domainHitList=map(lambda domain:os.popen("if [ -f /var/www/vhosts/system/"+domain+"/statistics/webstat/webalizer.current ];then  cat /var/www/vhosts/system/"+domain+"/statistics/webstat/webalizer.current | sed -n 3p |awk '{print $1}'; else echo '0'; fi").readline()[0:-1], domainList)
+    domainHitList=map(lambda domain:string.atoi(os.popen("if [ -f /var/www/vhosts/system/"+domain+"/statistics/webstat/webalizer.current ];then  cat /var/www/vhosts/system/"+domain+"/statistics/webstat/webalizer.current | sed -n 3p |awk '{print $1}'; else echo '0'; fi").readline()[0:-1]), domainList)
     print domainHitList
-    domainSslHitList=map(lambda domain:os.popen("if [ -f /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current ];then  cat /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current | sed -n 3p |awk '{print $1}'; else echo '0'; fi").readline()[0:-1], domainList)
+    domainSslHitList=map(lambda domain:string.atoi(os.popen("if [ -f /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current ];then  cat /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current | sed -n 3p |awk '{print $1}'; else echo '0'; fi").readline()[0:-1]), domainList)
     print domainSslHitList
     domainHitList=[domainHitList[i]+domainSslHitList[i] for i in range(len(domainHitList))]
     print domainHitList
