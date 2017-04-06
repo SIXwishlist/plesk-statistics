@@ -56,7 +56,7 @@ class Subscription:
         +";ftpLoginName:"+self.ftpLoginName \
         +";servicePlan:"+self.servicePlan \
         +";email:"+self.email \
-        +";hitNum:"+self.hitNum \
+        +";hitNum:"+str(self.hitNum) \
         +";hitNumLimit"+str(Subscription.servicePlanHitDict[self.servicePlan]) \
         +";"
     def getLoginName(self):
