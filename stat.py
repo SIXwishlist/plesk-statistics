@@ -39,8 +39,6 @@ class Subscription:
         print "servicePlan:", servicePlan
         print "email:", email
         print "hitNum:", hitNum
-    def sendEmail(self):
-        #
     def getLoginName(self):
         return os.popen("plesk  bin subscription --info "+self.domainName+" | grep 'Owner' | awk -F '[()]' '{print $2}'").readline()[0:-1]
     def getFtpLoginName(self):
@@ -63,6 +61,15 @@ def main():
     # subscriptionServicePlanList=map(lambda subscription:os.popen("plesk bin subscription --info "+subscription+" | tac | sed -n '5p' | awk '{print $9}'").readline()[0:-1], subscriptionList)
     # subscriptionServicePlanDict=dict((x,y) for x,y in zip(domainList,subscriptionServicePlanList))
     adminEmail=os.popen("plesk bin user --info admin | grep Email | awk '{print $2}'").readline()[0:-1]
+    for ss in subscriptionList:
+        obj=Subscription(ss)
+        obj.createDomainList()
+        obj.countHit()
+        if obj.isOverHit():
+            print "The subscription %s is Overhitted"%(ss)
+        else:
+            print "The subscription %s is not Overhitted"%(ss)
+            obj.logInfo()
 
 if __name__ == '__main__':
     main()
