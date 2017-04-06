@@ -37,13 +37,13 @@ class Subscription:
         else:
             return False
     def logInfo(self):
-        print "domainName:", domainName
-        print "contactName:", contactName
-        print "loginName:", loginName
-        print "ftpLoginName:", ftpLoginName
-        print "servicePlan:", servicePlan
-        print "email:", email
-        print "hitNum:", hitNum
+        print "domainName:",   self.domainName
+        print "contactName:",  self.contactName
+        print "loginName:",    self.loginName
+        print "ftpLoginName:", self.ftpLoginName
+        print "servicePlan:",  self.servicePlan
+        print "email:",        self.email
+        print "hitNum:",       self.hitNum
     def getLoginName(self):
         return os.popen("plesk  bin subscription --info "+self.domainName+" | grep 'Owner' | awk -F '[()]' '{print $2}'").readline()[0:-1]
     def getFtpLoginName(self):
