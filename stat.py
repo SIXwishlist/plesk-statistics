@@ -29,7 +29,7 @@ class Subscription:
   def isOverHit(self):
     if self.servicePlan in Subscription.servicePlanHitDict.keys():
       return self.hitNum > Subscription.servicePlanHitDict[self.servicePlan]
-    else
+    else:
       return false
   def logInfo(self):
     print "domainName:", domainName
