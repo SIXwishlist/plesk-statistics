@@ -49,7 +49,7 @@ class Subscription:
     def getFtpLoginName(self):
         return os.popen("plesk bin subscription --info "+self.domainName+" | grep 'FTP Login' | awk '{print $3}'").readline()[0:-1]
     def getServicePlan(self):
-        return os.popen("plesk bin subscription --info "+self.domainName+" | tac | sed -n '5p' | awk '{print $9}'").readline()[0:-1]
+        return os.popen("plesk bin subscription --info "+self.domainName+" | tac | sed -n '5p' | awk '{print $9}'").readline()[1:-2]
     def getContactName(self):
         return os.popen("plesk bin user --info "+self.loginName+" | grep 'Contact name' | awk -F ': ' '{print $2}'").readline()[0:-1]
     def getEmail(self):
