@@ -25,7 +25,7 @@ class Subscription:
         for key,value in Subscription.domainFtpLoginNameDict.items():
             if self.ftpLoginName == value:
                 tmpList.append(key)
-        self.domainList.tmpList
+        self.domainList=tmpList
     def countHit(self):
         print self.domainList
         # print Subscription.domainFtpLoginNameDict
