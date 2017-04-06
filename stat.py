@@ -1,4 +1,5 @@
 import os
+import string
 class Subscription:
     domainFtpLoginNameDict={}
     servicePlanHitDict={}
@@ -30,7 +31,7 @@ class Subscription:
         # print Subscription.domainFtpLoginNameDict
         for key,value in Subscription.domainHitDict.items():
             if key in self.domainList:
-                self.hitNum+=value
+                self.hitNum+=string.atoi(value)
     def isOverHit(self):
         if self.servicePlan in Subscription.servicePlanHitDict.keys():
             return self.hitNum > Subscription.servicePlanHitDict[self.servicePlan]
