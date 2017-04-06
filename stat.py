@@ -14,6 +14,7 @@ class Subscription:
         self.domainName=domainName
         self.loginName=self.getLoginName()
         self.ftpLoginName=self.getFtpLoginName()
+        print "ftpLoginName:",self.ftpLoginName
         self.servicePlan=self.getServicePlan()
         self.contactName=self.getContactName()
         self.email=self.getEmail()
@@ -25,7 +26,7 @@ class Subscription:
                 self.domainList.append(key)
     def countHit(self):
         print self.domainList
-        print Subscription.domainFtpLoginNameDict
+        # print Subscription.domainFtpLoginNameDict
         for key,value in Subscription.domainHitDict.items():
             if key in self.domainList:
                 self.hitNum+=value
