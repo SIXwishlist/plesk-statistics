@@ -17,6 +17,7 @@ class Subscription:
         self.servicePlan=self.getServicePlan()
         self.contactName=self.getContactName()
         self.email=self.getEmail()
+        self.domainList=[]
         self.domainList=self.createDomainList()
     def createDomainList(self):
         for key,value in Subscription.domainFtpLoginNameDict.items():
