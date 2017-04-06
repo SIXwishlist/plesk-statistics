@@ -31,8 +31,6 @@ class Subscription:
                 tmpList.append(key)
         self.domainList=tmpList
     def countHit(self):
-        print self.domainList
-        # print Subscription.domainFtpLoginNameDict
         for key,value in Subscription.domainHitDict.items():
             if key in self.domainList:
                 self.hitNum+=value
@@ -52,13 +50,11 @@ class Subscription:
     def logout(self):
         return "domainName:"+self.domainName \
         +";contactName:"+self.contactName \
-        +";loginName:"+self.loginName \
-        +";ftpLoginName:"+self.ftpLoginName \
         +";servicePlan:"+self.servicePlan \
         +";email:"+self.email \
         +";hitNum:"+str(self.hitNum) \
         +";hitNumLimit"+str(Subscription.servicePlanHitDict[self.servicePlan]) \
-        +";"
+        +";\n"
     def getLoginName(self):
         return os.popen("plesk  bin subscription --info "+self.domainName+" | grep 'Owner' | awk -F '[()]' '{print $2}'").readline()[0:-1]
     def getFtpLoginName(self):
@@ -83,7 +79,7 @@ def main():
     domainSslHitList=map(lambda domain:string.atoi(os.popen("if [ -f /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current ];then  cat /var/www/vhosts/system/"+domain+"/statistics/webstat-ssl/webalizer.current | sed -n 3p |awk '{print $1}'; else echo '0'; fi").readline()[0:-1]), domainList)
     domainHitList=[domainHitList[i]+domainSslHitList[i] for i in range(len(domainHitList))]
     Subscription.domainHitDict=dict((x,y) for x,y in zip(domainList,domainHitList))
-    Subscription.servicePlanHitDict={'Standard':10**4, 'Professional':2*10**4, 'Business':5*10**4}
+    Subscription.servicePlanHitDict={'Standard':10**6, 'Professional':2*10**6, 'Business':5*10**6}
     subscriptionList=map(lambda x:x[0:-1], os.popen('plesk bin subscription --list').readlines())
     # subscriptionServicePlanList=map(lambda subscription:os.popen("plesk bin subscription --info "+subscription+" | tac | sed -n '5p' | awk '{print $9}'").readline()[0:-1], subscriptionList)
     # subscriptionServicePlanDict=dict((x,y) for x,y in zip(domainList,subscriptionServicePlanList))
