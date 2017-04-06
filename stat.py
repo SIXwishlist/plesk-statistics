@@ -54,7 +54,7 @@ class Subscription:
     def getContactName(self):
         return os.popen("plesk bin user --info "+self.loginName+" | grep 'Contact name' | awk -F ': ' '{print $2}'").readline()[0:-1]
     def getEmail(self):
-        return os.popen("plesk bin user --info "+self.loginName+" | grep 'Email' | awk -F ': ' '{print $2}'").readline()[0:-1]
+        return os.popen("plesk bin user --info "+self.loginName+" | grep 'Email' | awk -F ': ' '{print $2}'").readline()[0:-2]
     def sendMail(self):
         try:
             os.popen('''curl -d 'apiUser=hkmars&apiKey=mOd5WW9D5cSvNbPK&from=hkmars@bisend.cn&fromName=必盛互联&subject=点击数超过限制&templateInvokeName=hit_num_over_limit' --data-urlencode 'xsmtpapi={"to": ["'''+self.email+'''"],"sub":{"%name%": ["'''+self.contactName+'''"],"%subscription%":["'''+self.domainName+'''"],"%year_month%":["2017年4月"],"%hit_num%":["'''+self.hitNum+'''"],"%hit_num_limit%":["'''+Subscription.servicePlanHitDict[self.servicePlan]+'''"]}}' http://api.sendcloud.net/apiv2/mail/sendtemplate''')
@@ -78,6 +78,7 @@ def main():
         obj=Subscription(ss)
         obj.countHit()
         if obj.domainName=='moko.site':
+            print "send email to Allen"
             obj.sendMail()
         if obj.isOverHit():
             print "The subscription %s is Overhitted"%(ss)
