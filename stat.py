@@ -42,7 +42,7 @@ class Subscription:
     def getLoginName(self):
         return os.popen("plesk  bin subscription --info "+self.domainName+" | grep 'Owner' | awk -F '[()]' '{print $2}'").readline()[0:-1]
     def getFtpLoginName(self):
-        return os.popen("plesk bin domain --info "+x+" | grep 'FTP Login' | awk '{print $3}'").readline()[0:-1]
+        return os.popen("plesk bin domain --info "+self.domainName+" | grep 'FTP Login' | awk '{print $3}'").readline()[0:-1]
     def getServicePlan(self):
         return os.popen("plesk bin subscription --info "+subscription+" | tac | sed -n '5p' | awk '{print $9}'").readline()[0:-1]
     def getContactName(self):
@@ -67,7 +67,6 @@ def main():
         obj.countHit()
         if obj.isOverHit():
             print "The subscription %s is Overhitted"%(ss)
-            obj.logInfo()
         else:
             print "The subscription %s is not Overhitted"%(ss)
             obj.logInfo()
