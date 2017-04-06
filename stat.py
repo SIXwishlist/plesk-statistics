@@ -11,7 +11,6 @@ class Subscription:
     email=''
     hitNum=0
     def __init__(self, domainName):
-        self.domainList=[]
         self.domainName=domainName
         self.loginName=self.getLoginName()
         self.ftpLoginName=self.getFtpLoginName()
@@ -19,7 +18,7 @@ class Subscription:
         self.servicePlan=self.getServicePlan()
         self.contactName=self.getContactName()
         self.email=self.getEmail()
-        self.domainList=self.createDomainList()
+        self.createDomainList()
     def createDomainList(self):
         tmpList=[]
         for key,value in Subscription.domainFtpLoginNameDict.items():
