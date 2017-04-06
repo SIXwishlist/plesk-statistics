@@ -64,7 +64,6 @@ def main():
     adminEmail=os.popen("plesk bin user --info admin | grep Email | awk '{print $2}'").readline()[0:-1]
     for ss in subscriptionList:
         obj=Subscription(ss)
-        obj.createDomainList()
         obj.countHit()
         if obj.isOverHit():
             print "The subscription %s is Overhitted"%(ss)
