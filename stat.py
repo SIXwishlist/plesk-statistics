@@ -15,7 +15,6 @@ class Subscription:
         self.domainName=domainName
         self.loginName=self.getLoginName()
         self.ftpLoginName=self.getFtpLoginName()
-        print "ftpLoginName:",self.ftpLoginName
         self.servicePlan=self.getServicePlan()
         self.contactName=self.getContactName()
         self.email=self.getEmail()
@@ -36,7 +35,7 @@ class Subscription:
         if self.servicePlan in Subscription.servicePlanHitDict.keys():
             return self.hitNum > Subscription.servicePlanHitDict[self.servicePlan]
         else:
-            return false
+            return False
     def logInfo(self):
         print "domainName:", domainName
         print "contactName:", contactName
