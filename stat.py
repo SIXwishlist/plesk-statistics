@@ -57,7 +57,7 @@ class Subscription:
         +";servicePlan:"+self.servicePlan \
         +";email:"+self.email \
         +";hitNum:"+self.hitNum \
-        +";hitNumLimit"+Subscription.servicePlanHitDict[self.servicePlan] \
+        +";hitNumLimit"+str(Subscription.servicePlanHitDict[self.servicePlan]) \
         +";"
     def getLoginName(self):
         return os.popen("plesk  bin subscription --info "+self.domainName+" | grep 'Owner' | awk -F '[()]' '{print $2}'").readline()[0:-1]
